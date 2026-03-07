@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptografia Simples</title>
+</head>
+
+<body>
+
+    <h1>Criptografia Simples</h1>
+
+    <div>
+        <input id="txtEntrada" type="text"> 
+        <button onclick="cifrar()">CIFRAR</button>
+        <button onclick="acaoCifrarCesar()">CIFRAR CESAR</button>
+        <button onclick="acaoCifrarVigenere()">CIFRAR VIGENÈRE</button>
+        <span>Resposta:</span>
+        <span id="resp1"></span>
+    </div>
+    <hr>
+    <div>
+        <input id="txtSaida" type="text"> 
+        <button onclick="decifrar()">DECIFRAR</button>
+        <button onclick="acaoDecifrarCesar()">DECIFRAR CESAR</button>
+        <button onclick="acaoDecifrarVigenere()">DECIFRAR VIGENÈRE</button>
+        <span>Resposta:</span>
+        <span id="resp2"></span>
+    </div>
+
+    <script src="./main.js"></script>
+
+</body>
+
+</html>
