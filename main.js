@@ -1,7 +1,7 @@
 console.log("Teste");
 
 
-// Primeira Parte: Cifra de Atbash
+// Part One: Atbash Cipher (Parte Um: Cifra Atbash)
 function cifrarAtbash(mensagem) {
     let txtCifrado = ""
     let letrasEntrada = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwyxz"
@@ -21,7 +21,7 @@ function cifrarAtbash(mensagem) {
     return txtCifrado
 }
 
-// Segunda Parte: Cifra de César
+// Second Part: Caesar Cipher (Segunda Parte: Cifra de César)
 function cifrarCesar(mensagem, chave) {
     let txtCifrado = ""
     let letrasEntrada = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwyxz"
@@ -44,7 +44,7 @@ function cifrarCesar(mensagem, chave) {
     return txtCifrado
 }
 
-// Terceira Parte: Cifra de Vigenère
+// Part Three: Vigenère Cipher (Terceira Parte: Cifra de Vigenère)
 function cifrarVigenere(mensagem, palavraChave, modo = 'codificar') {
 let resultado = ""
 let alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -104,4 +104,5 @@ function decifrar() {
     let txtCifrado = cifrarAtbash(txtOriginal)
     document.getElementById("resp2").innerText = txtCifrado
 }
+
 
