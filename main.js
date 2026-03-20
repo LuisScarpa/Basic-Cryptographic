@@ -91,7 +91,6 @@ function cifrarRSA_Didatico(mensagem, E, N) {
     let resultado = [];
     for (let i = 0; i < mensagem.length; i++) {
         let x = mensagem.charCodeAt(i);
-        // x^E mod N
         let cifrado = Number(BigInt(x) ** BigInt(E) % BigInt(N));
         resultado.push(cifrado);
     }
@@ -109,15 +108,12 @@ function decifrarRSA_Didatico(mensagemCifrada, D, N) {
     return resultado;
 }
 
-// Funções de Ação para os Botões
 function acaoCifrarRSA() {
     let txt = document.getElementById("txtEntrada").value;
-    // Gerando chaves com os primos 17 e 11 (N será 187)
     let chaves = gerarChavesRSA_Didaticas(17, 11);
     
     let resultado = cifrarRSA_Didatico(txt, chaves.publica.E, chaves.publica.N);
     
-    // Mostra o array de números como string separada por vírgula
     document.getElementById("resp1").innerText = resultado.join(", ");
 }
 
@@ -125,7 +121,6 @@ function acaoDecifrarRSA() {
     let txt = document.getElementById("txtSaida").value;
     let chaves = gerarChavesRSA_Didaticas(17, 11);
     
-    // Converte a string de números "10, 20, 30" de volta para um Array de números
     let arrayCifrado = txt.split(",").map(num => Number(num.trim()));
     
     let resultado = decifrarRSA_Didatico(arrayCifrado, chaves.privada.D, chaves.privada.N);
