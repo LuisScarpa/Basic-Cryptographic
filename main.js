@@ -101,7 +101,6 @@ function decifrarRSA_Didatico(mensagemCifrada, D, N) {
     let resultado = "";
     for (let i = 0; i < mensagemCifrada.length; i++) {
         let C = mensagemCifrada[i];
-        // C^D mod N
         let original = Number(BigInt(C) ** BigInt(D) % BigInt(N));
         resultado += String.fromCharCode(original);
     }
