@@ -1,7 +1,7 @@
 console.log("Teste");
 
 
-// Part One: Atbash Cipher (Parte Um: Cifra Atbash)
+// Primeira Parte: Cifra de Atbash
 function cifrarAtbash(mensagem) {
     let txtCifrado = ""
     let letrasEntrada = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwyxz"
@@ -21,7 +21,7 @@ function cifrarAtbash(mensagem) {
     return txtCifrado
 }
 
-// Second Part: Caesar Cipher (Segunda Parte: Cifra de César)
+// Segunda Parte: Cifra de César
 function cifrarCesar(mensagem, chave) {
     let txtCifrado = ""
     let letrasEntrada = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwyxz"
@@ -44,7 +44,7 @@ function cifrarCesar(mensagem, chave) {
     return txtCifrado
 }
 
-// Part Three: Vigenère Cipher (Terceira Parte: Cifra de Vigenère)
+// Terceira Parte: Cifra de Vigenère
 function cifrarVigenere(mensagem, palavraChave, modo = 'codificar') {
 let resultado = ""
 let alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -68,6 +68,70 @@ resultado += letra
 }
 return resultado
 }
+
+//parte 4: RSA 
+function gerarChavesRSA_Didaticas(p, q) {
+    if (p <= 1 || q <= 1) return null; 
+    const N = p * q;
+    const phi_N = (p - 1) * (q - 1);
+    let E = 3;
+    while (E < phi_N) {
+        if ((phi_N % E !== 0) && ((p - 1) % E !== 0) && ((q - 1) % E !== 0)) break;
+        E++;
+    }
+    let D = 1;
+    while (D < phi_N) {
+        if ((D * E) % phi_N === 1) break;
+        D++;
+    }
+    return { publica: { E, N }, privada: { D, N } };
+}
+
+function cifrarRSA_Didatico(mensagem, E, N) {
+    let resultado = [];
+    for (let i = 0; i < mensagem.length; i++) {
+        let x = mensagem.charCodeAt(i);
+        // x^E mod N
+        let cifrado = Number(BigInt(x) ** BigInt(E) % BigInt(N));
+        resultado.push(cifrado);
+    }
+    return resultado;
+}
+
+function decifrarRSA_Didatico(mensagemCifrada, D, N) {
+    let resultado = "";
+    for (let i = 0; i < mensagemCifrada.length; i++) {
+        let C = mensagemCifrada[i];
+        // C^D mod N
+        let original = Number(BigInt(C) ** BigInt(D) % BigInt(N));
+        resultado += String.fromCharCode(original);
+    }
+    return resultado;
+}
+
+// Funções de Ação para os Botões
+function acaoCifrarRSA() {
+    let txt = document.getElementById("txtEntrada").value;
+    // Gerando chaves com os primos 17 e 11 (N será 187)
+    let chaves = gerarChavesRSA_Didaticas(17, 11);
+    
+    let resultado = cifrarRSA_Didatico(txt, chaves.publica.E, chaves.publica.N);
+    
+    // Mostra o array de números como string separada por vírgula
+    document.getElementById("resp1").innerText = resultado.join(", ");
+}
+
+function acaoDecifrarRSA() {
+    let txt = document.getElementById("txtSaida").value;
+    let chaves = gerarChavesRSA_Didaticas(17, 11);
+    
+    // Converte a string de números "10, 20, 30" de volta para um Array de números
+    let arrayCifrado = txt.split(",").map(num => Number(num.trim()));
+    
+    let resultado = decifrarRSA_Didatico(arrayCifrado, chaves.privada.D, chaves.privada.N);
+    document.getElementById("resp2").innerText = resultado;
+}
+
 
 function acaoCifrarVigenere() {
 let txt = document.getElementById("txtEntrada").value
@@ -104,5 +168,4 @@ function decifrar() {
     let txtCifrado = cifrarAtbash(txtOriginal)
     document.getElementById("resp2").innerText = txtCifrado
 }
-
 
